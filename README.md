@@ -7,6 +7,7 @@ The project includes **form validation**, **error handling**, and **email delive
 
 ## ✨ Features
 - Input validation (name, email, message)
+- Input sanitization (XSS and SQL injection protection)
 - Error and success messages
 - Email sending with PHPMailer
 - Bootstrap styling for clean UI
