@@ -34,7 +34,7 @@ php-contact-form/
 ## ⚙️ Setup Instructions
 1. Clone the repo:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/php-contact-form.git
+   git clone https://github.com/dikewonsi/Contact-Form-PHPMailer.git
 2. Open the project in your local server environment (XAMPP, WAMP, Laragon, etc.).
 3. Install PHPMailer
    composer require phpmailer/phpmailer
