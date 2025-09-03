@@ -1,0 +1,30 @@
+# Composer dependencies
+/vendor/
+
+# Composer lock file (optional, keep if you want exact versions)
+/composer.lock
+
+# Environment variables
+.env
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# PHPStorm
+*.iml
+
+# Cache / Temp
+cache/
+tmp/
+*.tmp
+
+# Uploaded files (if any)
+uploads/
