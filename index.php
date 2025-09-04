@@ -1,4 +1,12 @@
 <?php
+    //First Load Composer's autoloader
+    require 'vendor/autoload.php';
+
+    //Import PHPMailer classes for use
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    //Proceed with form processing
     if($_SERVER["REQUEST_METHOD"] === "POST") {
         $name = trim($_POST["name"] ?? '');
         $email = trim($_POST["email"] ?? '');
@@ -8,7 +16,7 @@
 
         // 1. Validate fields
         if (empty($name)) {
-            $errors[] = "name is required";
+            $errors[] = "Name is required";
         } else {
             // Strip tags to avoid <script>, encode special chars to avoid XSS
             $name = htmlspecialchars(strip_tags($name), ENT_QUOTES, 'UTF-8');
@@ -30,9 +38,41 @@
             $message = htmlspecialchars(strip_tags($message), ENT_QUOTES, 'UTF-8)');
         }
         
-        //2. If no errors -> you can safely send email or insert into DB
+        //2. If no errors -> safely send email or insert into DB
         if (empty($errors)) {
-            echo "<p style='color: green;'>Form Submitted Successfully!</p>";
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->isSMTP();
+                $mail->Host     = 'smtp.gmail.com';       //SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'user1@gmail.com';         //SMTP username
+                $mail->Password = 'abcd efgh klmn opqr';               //SMTP password (Create an App Password, GMail does not allow regular passwords)
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port     = 587;      
+
+                //Recipients
+                $mail->setFrom($email, $name);              //From user submission
+                $mail->addAddress('user2@gmail.com');       //Email to receive the message
+
+                //Message
+                $mail->isHTML(true);
+                $mail->Subject = "New Contact Form Submission";
+                $mail->Body = "
+                    <h3>You have a new message from your website contact form:</h3>
+                    <p><strong>Name:</strong> $name</p>
+                    <p><strong>Email:</strong> $email</p>
+                    <p><strong>Message:</strong> $message</p>
+                ";
+
+                $mail->AltBody = "Name: $name\nEmail: $email\nMessage: $message";
+
+                $mail->send();
+                echo "<p style='color: green;'>Form Submitted Successfully!</p>";
+            } catch (Exception $e) {
+                echo "<p style='color: red;'>Message could not be sent. Mailer Error: {$mail->ErrorInfo}</p>";
+            }
 
             //Example if inserting into DB with PDO (safe against SQLi)
             /*
