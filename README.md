@@ -45,6 +45,19 @@ php-contact-form/
      $mail->Password = 'yourpassword';
 5. Run the app → submit a test message → check your inbox.
 
+## Screenshots
+### Contact Form (Default)
+![Form Default](screenshots/form-ui.png)
+
+### Validation Errors
+![Validation Errors](screenshots/validation-error.png)
+
+### Successful Submission
+![Success Message](screenshots/success-submission.png)
+
+### Email Received
+![Email Inbox](screenshots/email-proof.png)
+
 
 👨‍💻 Author
 
