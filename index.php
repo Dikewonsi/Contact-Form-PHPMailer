@@ -49,7 +49,7 @@
                 $mail->Host     = 'smtp.gmail.com';       //SMTP server
                 $mail->SMTPAuth = true;
                 $mail->Username = 'user1@gmail.com';         //SMTP username
-                $mail->Password = 'abcd efgh klmn opqr';               //SMTP password (Create an App Password, GMail does not allow regular passwords)
+                $mail->Password = 'abcd wxyz yuio asdf';               //SMTP password (Create an App Password, GMail does not allow regular passwords)
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port     = 587;      
 
@@ -80,10 +80,6 @@
             $stmt = $pdo->prepare("INSERT INTO contact_form (name, email, message) VALUES (?, ?, ?)");
             $stmt->execute([$name, $email, $message]);
             */
-        } else {
-            foreach ($errors as $error) {
-                echo "<p style='color: red;'>$error</p>";
-            }
         }
     }
 ?>
@@ -123,7 +119,7 @@
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" value="<?= htmlspecialchars($email ?? '') ?>">
+                <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email" value="<?= htmlspecialchars($email ?? '') ?>">
             </div>
 
             <div class="mb-3">
